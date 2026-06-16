@@ -14,6 +14,10 @@ A lightweight, privacy-respecting Chrome extension (Manifest V3). No tracking, n
 
 </div>
 
+<p align="center">
+  <img src="screenshot.png" width="360" alt="Scrobblr screenshot" />
+</p>
+
 ## What it does
 
 When you watch a music video on YouTube or YouTube Music, this extension detects the track, cleans up the title into an artist/song pair, and scrobbles it to Last.fm — automatically, once you've watched **more than one minute** or the video **finishes**. Only videos in your allowed YouTube categories are scrobbled (Music and Entertainment by default), so vlogs and tutorials don't pollute your library.
