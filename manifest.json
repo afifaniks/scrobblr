@@ -1,0 +1,47 @@
+{
+  "manifest_version": 3,
+  "name": "Scrobblr",
+  "version": "1.0.0",
+  "description": "Scrobblr — automatically scrobble the music videos you watch on YouTube to your Last.fm profile.",
+  "permissions": ["storage", "identity", "scripting"],
+  "host_permissions": [
+    "https://ws.audioscrobbler.com/*",
+    "https://www.last.fm/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/*", "https://music.youtube.com/*"],
+      "js": ["noise.js", "content.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["inject.js"],
+      "matches": ["https://www.youtube.com/*", "https://music.youtube.com/*"],
+      "use_dynamic_url": true
+    }
+  ],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "Scrobblr",
+    "default_icon": {
+      "16": "icons/idle16.png",
+      "48": "icons/idle48.png",
+      "128": "icons/idle128.png"
+    }
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; base-uri 'none'"
+  },
+  "options_page": "options/options.html",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
