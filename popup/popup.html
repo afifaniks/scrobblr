@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <header class="head">
+    <div class="brand">
+      <span class="logo"></span>
+      <span class="brand-name">Scrobblr</span>
+    </div>
+    <div class="toggle-wrap">
+      <span class="toggle-label" id="toggleLabel">On</span>
+      <label class="switch" title="Pause / resume scrobbling">
+        <input type="checkbox" id="enabledToggle" />
+        <span class="slider"></span>
+      </label>
+    </div>
+  </header>
+
+  <section class="card nowplaying" id="nowPlayingCard" hidden>
+    <div class="np-label">
+      <span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span id="npLabel">Scrobbling now</span>
+    </div>
+    <div class="np-title" id="npTitle">—</div>
+    <div class="np-artist" id="npArtist">—</div>
+  </section>
+
+  <section class="recent">
+    <div class="recent-head">
+      <span>Recent scrobbles</span>
+      <span class="count" id="scrobbleCount">0</span>
+    </div>
+    <ul class="recent-list" id="recentList"></ul>
+    <div class="empty" id="recentEmpty">No scrobbles yet. Play a music video on YouTube.</div>
+    <button class="btn link recent-toggle" id="recentToggle" hidden></button>
+  </section>
+
+  <section id="statusCard" class="status">
+    <div class="status-dot" id="statusDot"></div>
+    <div class="status-text">
+      <span class="status-title" id="statusTitle">Checking…</span>
+      <span class="status-sub" id="statusSub"></span>
+    </div>
+    <button class="btn ghost" id="statusAction" hidden></button>
+  </section>
+
+  <footer class="foot">
+    <button class="btn link" id="openOptions">Settings &amp; categories</button>
+  </footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>
