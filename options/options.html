@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scrobblr — Settings</title>
+  <link rel="stylesheet" href="options.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <span class="logo"></span>
+      <div>
+        <h1>Scrobblr</h1>
+        <p class="tag">Auto-scrobble music videos you watch on YouTube.</p>
+      </div>
+    </header>
+
+    <!-- STEP 1: API credentials -->
+    <section class="panel">
+      <div class="panel-head">
+        <h2><span class="step">1</span> Last.fm API credentials</h2>
+      </div>
+      <p class="help">
+        Create an API account at
+        <a href="https://www.last.fm/api/account/create" target="_blank" rel="noopener">last.fm/api/account/create</a>,
+        then paste the key and shared secret here. Use any Callback URL (it isn't used by this extension).
+      </p>
+      <label class="field">
+        <span>API Key</span>
+        <input type="text" id="apiKey" placeholder="32-character API key" autocomplete="off" spellcheck="false" />
+      </label>
+      <label class="field">
+        <span>Shared Secret</span>
+        <input type="password" id="apiSecret" placeholder="Shared secret" autocomplete="off" spellcheck="false" />
+      </label>
+      <div class="row">
+        <button class="btn primary" id="saveCreds">Save credentials</button>
+        <span class="inline-msg" id="credsMsg"></span>
+      </div>
+    </section>
+
+    <!-- STEP 2: connect account -->
+    <section class="panel">
+      <div class="panel-head">
+        <h2><span class="step">2</span> Connect your account</h2>
+      </div>
+      <div class="connect-state" id="connectState">
+        <div class="cs-dot" id="csDot"></div>
+        <div class="cs-text" id="csText">Not connected</div>
+      </div>
+      <div class="row">
+        <button class="btn primary" id="connectBtn">Connect Last.fm</button>
+        <button class="btn danger" id="disconnectBtn" hidden>Disconnect</button>
+        <span class="inline-msg" id="connectMsg"></span>
+      </div>
+      <p class="help small">
+        A Last.fm window opens — click <strong>Yes, allow access</strong> and it connects
+        automatically. If Last.fm rejects the callback, set your API app's
+        <strong>Callback URL</strong> to:
+        <code id="redirectUri" class="code">…</code>
+      </p>
+    </section>
+
+    <!-- STEP 3: categories -->
+    <section class="panel">
+      <div class="panel-head">
+        <h2><span class="step">3</span> Categories to scrobble</h2>
+      </div>
+      <p class="help">
+        Only videos whose YouTube category is in this list get scrobbled. <strong>Music</strong> and
+        <strong>Entertainment</strong> are on by default.
+      </p>
+      <div class="chips" id="chips"></div>
+      <div class="add-row">
+        <input list="catSuggest" id="newCat" placeholder="Add a category (e.g. Gaming)" />
+        <datalist id="catSuggest">
+          <option value="Music"></option>
+          <option value="Entertainment"></option>
+          <option value="Gaming"></option>
+          <option value="People &amp; Blogs"></option>
+          <option value="Film &amp; Animation"></option>
+          <option value="Comedy"></option>
+          <option value="Sports"></option>
+          <option value="Education"></option>
+          <option value="Science &amp; Technology"></option>
+          <option value="News &amp; Politics"></option>
+          <option value="Howto &amp; Style"></option>
+          <option value="Travel &amp; Events"></option>
+          <option value="Pets &amp; Animals"></option>
+          <option value="Autos &amp; Vehicles"></option>
+          <option value="Nonprofits &amp; Activism"></option>
+        </datalist>
+        <button class="btn ghost" id="addCat">Add</button>
+      </div>
+    </section>
+
+    <!-- cleanup words -->
+    <section class="panel">
+      <div class="panel-head">
+        <h2><span class="step">4</span> Title cleanup words</h2>
+      </div>
+      <p class="help">
+        Words or phrases to strip from video titles when working out the artist and song — on top
+        of the built-in list (<em>Official Video</em>, <em>Lyrics</em>, <em>Remastered</em>, …).
+        Handy for tags like <em>Sped Up</em>, <em>8D Audio</em>, or <em>Slowed + Reverb</em>.
+        Matching is case-insensitive.
+      </p>
+      <div class="chips" id="noiseChips"></div>
+      <div class="add-row">
+        <input id="newNoise" placeholder="Add a word/phrase (e.g. Sped Up)" />
+        <button class="btn ghost" id="addNoise">Add</button>
+      </div>
+      <div class="builtin-head">Built-in — always applied</div>
+      <div class="chips builtin" id="builtinChips"></div>
+    </section>
+
+    <!-- behaviour -->
+    <section class="panel">
+      <div class="panel-head"><h2>Behaviour</h2></div>
+      <label class="toggle-row">
+        <span>Enable auto-scrobbling</span>
+        <span class="switch"><input type="checkbox" id="enabled" /><span class="slider"></span></span>
+      </label>
+
+      <label class="field" style="margin-top: 16px;">
+        <span>Scrobble after</span>
+        <div class="num-row">
+          <input type="number" id="scrobbleAfter" min="10" max="3600" step="5" />
+          <span class="num-unit">seconds of active play</span>
+        </div>
+      </label>
+      <p class="help small">
+        A track is scrobbled once it has been actively played for this long, <strong>or</strong> when
+        the video finishes — whichever comes first. Default is 60 seconds. (Pauses and seeks don't
+        count toward this time.)
+        <span class="inline-msg" id="behaviourMsg"></span>
+      </p>
+    </section>
+
+    <footer class="foot">Your credentials and session stay in this browser's local storage.</footer>
+  </div>
+  <script src="../noise.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>
